@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-        TF_WORKSPACE = '/home/ubuntu/terraconfig' 
+        TF_WORKSPACE = '/var/lib/jenkins/terraconfig' 
     }
 
     stages {
