@@ -1,34 +1,35 @@
 pipeline {
     agent any
-    
-    environment {
-        TF_WORKSPACE = '/var/lib/jenkins/terraconfig' 
-    }
 
     stages {
         stage('Terraform Init') {
             steps {
-                script {
-                    sh "cd ${env.TF_WORKSPACE} && terraform init"
+                dir('/home/ubuntu/terraconfig/') {
+                    script {
+                        sh 'terraform init'
+                    }
                 }
             }
         }
+        
         stage('Terraform Plan') {
             steps {
-                script {
-                    sh "cd ${env.TF_WORKSPACE} && terraform plan -out=tfplan"
+                dir('/home/ubuntu/terraconfig/') {
+                    script {
+                        sh 'terraform plan -out=tfplan'
+                    }
                 }
             }
         }
+        
         stage('Terraform Apply') {
             steps {
-                script {
-                    sh "cd ${env.TF_WORKSPACE} && terraform apply -auto-approve tfplan"
+                dir('/home/ubuntu/terraconfig/') {
+                    script {
+                        sh 'terraform apply -auto-approve tfplan'
+                    }
                 }
             }
         }
-
     }
-
-   
 }
