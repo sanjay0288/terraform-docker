@@ -31,5 +31,15 @@ pipeline {
                 }
             }
         }
+        
+        stage('Terraform Destroy') {
+            steps {
+                dir('/home/ubuntu/terraconfig/') {
+                    script {
+                        sh 'terraform destroy -auto-approve'
+                    }
+                }
+            }
+        }
     }
 }
